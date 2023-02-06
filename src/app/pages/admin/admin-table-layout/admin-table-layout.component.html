@@ -1,0 +1,8 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="push" [(opened)]="opened">
+        <app-admin-sidebar [currentComponent]="componentName"></app-admin-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-admin-table-edit (toggleSidenav)="sidenav.toggle()"></app-admin-table-edit>
+    </mat-sidenav-content>
+</mat-sidenav-container>

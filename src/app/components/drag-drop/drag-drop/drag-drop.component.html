@@ -1,0 +1,52 @@
+<div class="tables-canvas" id="tables-canvas">
+    <div *ngIf="editMode" class="command-pallete">
+        
+        <button id="add-table-btn" mat-fab color="primary" aria-label="Add table" (click)="addTable()">
+            <mat-icon>add</mat-icon>
+        </button>
+
+        <button id="delete-table-btn" *ngIf="selectedTable" mat-fab color="primary" aria-label="Delete selected table" (click)="removeTable(selectedTable)">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+
+        <button id="save-table-btn" mat-fab color="primary" aria-label="Save tables" (click)="saveTables()">
+            <mat-icon>save</mat-icon>
+        </button>
+
+    </div>
+
+    <div class="drag-cont" (click)="selectTable(null, $event)">
+        <ng-container *ngFor="let tableData of tablesData" >
+            <div *ngIf="tableData.active !== false" class="draggable-table" id="table-id-{{tableData.id}}"
+            [ngStyle]="{
+                'width': tableData.tableWidth + 'px',
+                'height': tableData.tableHeight + 'px',
+                'left': tableData.positionX + 'px',
+                'top': tableData.positionY + 'px'
+            }"
+            [ngClass]="{'selected_table': selectedTable?.id === tableData?.id}"
+            [ngClass]="{
+                'free-table': tableData?.orderObj === undefined,
+                'for-preparation-table': tableData?.orderObj?.status === 'FOR_PREPARATION',
+                'in-progress-table': tableData?.orderObj?.status === 'IN_PROGRESS',
+                'ready-table': tableData?.orderObj?.status === 'READY',
+                'delivered-table': tableData?.orderObj?.status === 'DELIVERED',
+                'finished': tableData?.orderObj?.status === 'FINISHED',
+                'disabled-table': tableData?.orderObj !== undefined && !isMyTable(tableData)
+            }"
+            (click)="onClickTable(tableData, $event)"
+            (appAfterIf)="initDraggable()"
+                
+            >
+
+            <input *ngIf="selectedTable?.id === tableData?.id" [(ngModel)]="tableData.tableNumber" class="table-number-edit" type="number">
+            <div class="handle">
+                <span *ngIf="selectedTable?.id !== tableData?.id" class="table-number">{{tableData.tableNumber}}</span>
+                <span *ngIf="editMode === false && tableData.orderObj" class="table-status">{{tableData.orderObj.status | orderStatusDisplay}}</span>
+                <span *ngIf="editMode === false && !tableData.orderObj" class="table-status">Free</span>
+            </div>
+        </div>
+        </ng-container>
+    </div>
+</div>

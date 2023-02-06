@@ -1,0 +1,119 @@
+<div class="content-body" style="height: 100%; width: 100%; padding-top: 0; margin-left: 0;">
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <div class="nav-header" style="width: 100%;">
+        <div style="background-color: white; width: 100%; height: 100%;">
+            <div class="row page-titles mx-0" style="display: flex; height: 100%;">
+                <div style="height: 100%; flex: 30%;">
+                    <div style="display: inline-block; height: 100%;">
+                        <a href="http://localhost:4200/admin" class="brand-logo">
+                            <img class="logo-abbr" src="../../../assets/images/logo.png" alt="">
+                            <img class="logo-compact" src="../../../assets/images/logo-aldente.png" alt="">
+                            <img class="brand-title" src="../../../assets/images/logo-aldente.png" alt="">
+                        </a>
+                    </div>
+                    <div id="hamburger" class="hamburger" (click)="toggleSidenavFunc()" style="display: inline-block; top: -5px;">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                </div>
+
+                <div style="flex: 23%; display: flex; justify-content: flex-end; align-items: center;">
+                    <h2 class="text-black font-w600 mb-0" style="text-align: center;">Menu Items</h2>
+                </div>
+
+
+                <div style="flex: 47%; display: flex; justify-content: flex-end; align-items: center;">
+                  <div class="btn btn-success" style="background-color: blue; cursor: pointer;" (click)="openAddForm()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 30"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" fill="#fff"/></svg>
+                    <span id="addNew" style="font-size: 20px;"> Add new</span>
+                  </div>
+
+                  <div class="header-left" style="margin-left: 10px;">
+                    <div class="search_bar dropdown show">
+                      <div class="dropdown-menu p-0 m-0 show">
+                        <form>
+                          <input id="search-menu-items-input" [(ngModel)]="searchInput" class="form-control" type="search" placeholder="Search items" aria-label="Search" name="search">
+                        </form>
+                      </div>
+                      <span id="search-button" (click)="searchItems()" class="search_icon p-3 c-pointer">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.7871 22.7761L17.9548 16.9437C19.5193 15.145 20.4665 12.7982 20.4665 10.2333C20.4665 4.58714 15.8741 0 10.2333 0C4.58714 0 0 4.59246 0 10.2333C0 15.8741 4.59246 20.4665 10.2333 20.4665C12.7982 20.4665 15.145 19.5193 16.9437 17.9548L22.7761 23.7871C22.9144 23.9255 23.1007 24 23.2816 24C23.4625 24 23.6488 23.9308 23.7871 23.7871C24.0639 23.5104 24.0639 23.0528 23.7871 22.7761ZM1.43149 10.2333C1.43149 5.38004 5.38004 1.43681 10.2279 1.43681C15.0812 1.43681 19.0244 5.38537 19.0244 10.2333C19.0244 15.0812 15.0812 19.035 10.2279 19.035C5.38004 19.035 1.43149 15.0865 1.43149 10.2333Z" fill="#A4A4A4"/></svg>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="dropdown custom-dropdown ml-3" style="margin-bottom: 0; margin-right: 20px">
+<!--                    <select [(ngModel)]="selectedCat" class="btn btn-primary light d-flex align-items-center svg-btn" name="selectedCat">-->
+<!--                      <div class="dropdown-menu dropdown-menu-right">-->
+<!--                        <option class="dropdown-item" *ngFor="let cat of categories" value="{{ cat.id }}">{{ cat.name }}</option>-->
+<!--                      </div>-->
+<!--                    </select>-->
+                    <button id="filter-menu-items-button" type="button" class="btn btn-primary light d-flex align-items-center svg-btn" data-toggle="dropdown" aria-expanded="false">
+<!--                      <svg width="16" height="16" class="scale5" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.4281 2.856H21.8681V1.428C21.8681 0.56 21.2801 0 20.4401 0C19.6001 0 19.0121 0.56 19.0121 1.428V2.856H9.71606V1.428C9.71606 0.56 9.15606 0 8.28806 0C7.42006 0 6.86006 0.56 6.86006 1.428V2.856H5.57206C2.85606 2.856 0.560059 5.152 0.560059 7.868V23.016C0.560059 25.732 2.85606 28.028 5.57206 28.028H22.4281C25.1441 28.028 27.4401 25.732 27.4401 23.016V7.868C27.4401 5.152 25.1441 2.856 22.4281 2.856ZM5.57206 5.712H22.4281C23.5761 5.712 24.5841 6.72 24.5841 7.868V9.856H3.41606V7.868C3.41606 6.72 4.42406 5.712 5.57206 5.712ZM22.4281 25.144H5.57206C4.42406 25.144 3.41606 24.136 3.41606 22.988V12.712H24.5561V22.988C24.5841 24.136 23.5761 25.144 22.4281 25.144Z" fill="#2F4CDD"/></svg>-->
+                      <span class="fs-16 ml-3"> {{ filterType }} </span>
+                      <i class="fa fa-angle-down scale5 ml-3"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a [id]="'filter-option-'+cat.name" class="dropdown-item" *ngFor="let cat of categories" (click)="loadMenuItemsByCategory(cat.id); filterType = cat.name.toString()">{{ cat.name }}</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+    <div id="menu-item-counter" style="height: 0; width: 0">{{elNumber}}</div>
+    <div style="padding-top: 120px;">
+        <perfect-scrollbar style="position: relative; width: 100%;" [scrollIndicators]="true" (psXReachEnd)="onScrollEvent($event)"
+            (psYReachEnd)="onScrollEvent($event)" (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollEvent($event)" class="scroll-container">
+                <div class="scrollable-content">
+                    <div class="container-fluid">
+                        <div class="row">
+<!--                            <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6" *ngFor="let menuItem of menuItems | async; index as i">-->
+<!--                                <div class="card">-->
+<!--                                    <div class="card-body">-->
+<!--                                        <div class="new-arrival-product">-->
+<!--                                            <div class="new-arrivals-img-contnent">-->
+<!--                                                <img class="img-fluid" src="../../../assets/images/product/{{ i + 1 }}.jpg" alt="">-->
+<!--                                            </div>-->
+<!--                                            <div class="new-arrival-content text-center mt-3">-->
+<!--                                                <h4>{{ menuItem.item.name }}</h4>-->
+<!--                                                <span class="price">{{ menuItem.price.value }} RSD</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                          <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6" *ngFor="let menuItem of menuItems | async; index as i">-->
+                          <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6" *ngFor="let menuItem of menuItems | async; index as i">
+                            <mat-card class="card">
+                              <div class="card-body">
+                                <div class="new-arrival-product">
+                                  <div [id]="'menu-item-'+menuItem.item.name" class="new-arrivals-img-contnent" (click)="openUpdateForm(menuItem)" style="cursor: pointer">
+                                    <img class="img-fluid" src="{{menuItem.imageUrl || '../../../assets/images/product/1.jpg'}}" alt="">
+                                  </div>
+                                  <div class="new-arrival-content text-center mt-3">
+                                    <h4 [id]="'name-sort-'+i" matTooltip="Sort by name" (click)="sortItems('name')" style="cursor: pointer">
+                                      <span *ngIf="currSort==='name' && currSortType==='asc'" matTooltip="Sort by name ascending"> <i class="fa fa-angle-up scale5 ml-3" style="margin-right: 20px; cursor: pointer"></i> </span>
+                                      {{menuItem.item.name}}
+                                      <span *ngIf="currSort==='name' && currSortType==='desc'" matTooltip="Sort by name descending"> <i class="fa fa-angle-down scale5 ml-3" style="margin-left: 5px; cursor: pointer"></i> </span>
+                                    </h4>
+                                    <span class="price" matTooltip="Sort by price" (click)="sortItems('price')" style="cursor: pointer">
+                                      <span *ngIf="currSort==='price' && currSortType==='asc'" matTooltip="Sort by price ascending"> <i class="fa fa-angle-up scale5 ml-3" style="margin-right: 20px; cursor: pointer"></i> </span>
+                                      {{menuItem.price.value}} RSD
+                                      <span *ngIf="currSort==='price' && currSortType==='desc'" matTooltip="Sort by price descending"> <i class="fa fa-angle-down scale5 ml-3" style="margin-left: 5px; cursor: pointer"></i> </span>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </mat-card>
+                          </div>
+                        </div>
+                      <mat-paginator [pageSizeOptions]="[4, 8, 12]"></mat-paginator>
+                    </div>
+                </div>
+        </perfect-scrollbar>
+    </div>
+</div>

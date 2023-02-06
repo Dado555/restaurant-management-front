@@ -1,0 +1,85 @@
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div style="height: 100%;">
+
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <div class="nav-header">
+        <a href="index.html" class="brand-logo">
+            <img class="logo-abbr" src="../../../assets/images/logo.png" alt="">
+            <img class="logo-compact" src="../../../assets/images/logo-aldente.png" alt="">
+            <img class="brand-title" src="../../../assets/images/logo-aldente.png" alt="">
+        </a>
+
+        <!--
+        <div class="nav-control">
+            <div class="hamburger">
+                <span class="line"></span><span class="line"></span><span class="line"></span>
+            </div>
+        </div>
+        -->
+    </div>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+
+    <!--**********************************
+        Sidebar start
+    ***********************************-->
+    <div class="deznav">
+        <!--<div class="deznav-scroll">-->
+        <perfect-scrollbar style="position: relative; max-width: 600px; max-height: 100%;" [scrollIndicators]="true" (psXReachEnd)="onScrollEvent($event)"
+        (psYReachEnd)="onScrollEvent($event)" (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollEvent($event)" class="scroll-container">
+            <div class="scrollable-content">
+                <ul class="metismenu" id="menu">
+                    <li routerLink='/admin' id="admin-dashboard-btn"><a class="has-arrow ai-icon" aria-expanded="false">
+                            <i class="flaticon-381-networking" [ngStyle]="{'color': colors.get('Dashboard')}" style="font-size: 3vh;"></i>
+                            <span class="nav-text" style="font-size: 3vh; cursor: pointer;">Dashboard</span>
+                        </a>
+                    </li>
+                    <!-- <li (click)="gotoList('Analytics')" id="admin-analytics-btn"><a class="has-arrow ai-icon" aria-expanded="false">
+                            <i class="flaticon-381-newspaper" [ngStyle]="{'color': colors.get('Analytics')}" style="font-size: 3vh;"></i>
+                            <span class="nav-text" style="font-size: 3vh; cursor: pointer;">Analytics</span>
+                        </a>
+                    </li> -->
+                    <li (click)="gotoList('Workers')" id="admin-workers-btn"><a class="has-arrow ai-icon" aria-expanded="false">
+                            <i class="flaticon-381-user-8" [ngStyle]="{'color': colors.get('Workers')}" style="font-size: 3vh;"></i>
+                            <span class="nav-text" style="font-size: 3vh; cursor: pointer;">Workers</span>
+                        </a>
+                    </li>
+                    <li (click)="gotoList('Orders')" id="admin-orders-btn"><a class="has-arrow ai-icon" aria-expanded="false">
+                            <i class="flaticon-381-menu" [ngStyle]="{'color': colors.get('Orders')}" style="font-size: 3vh;"></i>
+                            <span class="nav-text" style="font-size: 3vh; cursor: pointer;">Orders</span>
+                        </a>
+                    </li>
+                    <li (click)="gotoList('Menu items')" id="admin-menu-items-btn"><a class="has-arrow ai-icon" aria-expanded="false">
+                        <i class="flaticon-381-app" [ngStyle]="{'color': colors.get('Menu items')}" style="font-size: 3vh;"></i>
+                        <span class="nav-text" style="font-size: 3vh; cursor: pointer;">Menu items</span>
+                    </a>
+                    </li>
+                    <li (click)="gotoList('Table layout')" id="admin-table-btn"><a class="has-arrow ai-icon" aria-expanded="false">
+                        <i class="flaticon-381-app" [ngStyle]="{'color': colors.get('Table Layout')}" style="font-size: 3vh;"></i>
+                        <span class="nav-text" [ngStyle]="{'color': colors.get('Table Layout')}" style="font-size: 3vh; cursor: pointer;">Table Layout</span>
+                    </a>
+                    </li>
+
+                    <li id="admin-logout-btn" (click)="logout()"><a class="ai-icon" aria-expanded="false">
+                        <i class="flaticon-381-networking" style="font-size: 3vh;" ></i>
+                        <span class="nav-text" style="font-size: 3vh; cursor: pointer;">Logout</span>
+                    </a>
+                    </li>
+
+                </ul>
+            </div>
+        </perfect-scrollbar>
+        <!--</div>-->
+    </div>
+    <!--**********************************
+        Sidebar end
+    ***********************************-->
+</div>
+<!--**********************************
+Main wrapper end
+***********************************-->

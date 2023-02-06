@@ -1,0 +1,115 @@
+<mat-sidenav-container>
+    <mat-sidenav-content>
+        <app-navheader></app-navheader>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<div class="container" style="margin-top: 150px;">
+
+    <h1>New Orders</h1>
+
+    <div class="horizontal-scrollbar">
+
+        <div *ngIf="newOrders.length === 0">
+            <h3>No new orders.</h3>
+            <table><tr class="cdk-row"></tr></table>
+        </div>
+
+        <div class="hs-el" *ngFor="let order of newOrders">
+
+            <h1>{{ order.id }}</h1>
+
+            <table mat-table [dataSource]="order.orderItems" matSort class="mat-elevation-z8">
+            
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
+                    <td mat-cell *matCellDef="let orderItem"> {{orderItem.menuItem.item.name}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount"> Amount </th>
+                    <td style="text-align: center;" mat-cell *matCellDef="let orderItem"> {{orderItem.amount}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="currentPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by price"> Price </th>
+                    <td mat-cell *matCellDef="let orderItem"> {{orderItem.currentPrice}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="preparationTime">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by preparationTime"> Preparation time </th>
+                    <td mat-cell *matCellDef="let orderItem"> {{orderItem.menuItem.item.preparationTime}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="changeStatus">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td style="padding-left: 10px;" mat-cell *matCellDef="let orderItem"> 
+                        <button *ngIf="orderItem.status === 'FOR_PREPARATION'" (click)="takeOrderItem(orderItem.id)" class="take-btn btn-sm btn dark btn-info">TAKE</button>    
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+    </div>
+
+
+    <h1 class="accepted-orders">Accepted Orders</h1>
+
+    <div class="vertical-scrollbar">
+
+        <mat-accordion class="example-headers-align">
+
+            <div *ngIf="acceptedOrders.length === 0">
+                <h3>No new orders.</h3>
+                <table><tr class="cdk-row"></tr></table>
+            </div>
+
+            <mat-expansion-panel *ngFor="let order of acceptedOrders" [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{ order.id }}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <table mat-table [dataSource]="order.orderItems" matSort class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
+                        <td mat-cell *matCellDef="let orderItem"> {{orderItem.menuItem.item.name}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount"> Amount </th>
+                        <td mat-cell *matCellDef="let orderItem"> {{orderItem.amount}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="currentPrice">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by price"> Price </th>
+                        <td mat-cell *matCellDef="let orderItem"> {{orderItem.currentPrice}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="preparationTime">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by preparationTime"> Preparation time </th>
+                        <td mat-cell *matCellDef="let orderItem"> {{orderItem.menuItem.item.preparationTime}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="changeStatus">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let orderItem"> 
+                            <button *ngIf="orderItem.status === 'IN_PROGRESS'" (click)="markOrderItemAsReady(orderItem.id)"  class="ready-btn btn-sm btn dark btn-success">MARK AS READY</button>    
+                        </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+        
+    </div>
+
+</div>

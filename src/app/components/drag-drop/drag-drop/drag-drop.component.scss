@@ -1,0 +1,98 @@
+.drag-cont {
+  width: 1500px;
+  height: 1000px;
+  background-size: 25px 25px;
+  background-image: linear-gradient(
+      to right,
+      rgba(128, 128, 128, 0.13) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.13) 1px, transparent 1px);
+  position: relative;
+}
+
+.draggable-table {
+  padding: 5px;
+  width: 150px;
+  height: 50px;
+  background-color: #d8dae7;
+  border: 1px solid #000000;
+  text-align: center;
+  position: absolute;
+  cursor: move;
+}
+
+.table-number {
+  top: 0;
+  left: 0;
+  font-size: 2em;
+  font-weight: bold;
+  position: absolute;
+  padding: 0.3em;
+}
+
+.tables-canvas {
+  width: 100%;
+  height: calc(100vh - 100px);
+  overflow: auto;
+}
+
+.selected_table {
+  border: 3px solid yellow;
+}
+
+.command-pallete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.command-pallete > button {
+  margin-bottom: 10px;
+}
+
+.handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: -1;
+  width: 100%;
+}
+
+.table-number-edit {
+  width: 60px;
+  height: 40px;
+  position: absolute;
+  font-size: 2em;
+  top: 0;
+  left: 0;
+}
+
+.table-status {
+  font-size: 1em;
+  padding: 0.3em;
+  border-radius: 0.3em;
+  background-color: rgb(79, 13, 85);
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.in-progress-table .for-preparation-table {
+  background: #ff6d4d;
+}
+
+.ready-table {
+  background: #24a247;
+}
+
+.disabled-table {
+  background: #888;
+}

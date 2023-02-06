@@ -1,0 +1,43 @@
+.container {
+    margin-top: 3%;
+}
+
+div.horizontal-scrollbar {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.hs-el {
+    display: inline-block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    vertical-align: top;
+}
+
+.accepted-orders {
+    margin-top: 2em;
+}
+
+div.vertical-scrollbar table {
+    width: 100%;
+}
+
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.mat-panel-title {
+    color: rgb(158, 158, 158);
+}

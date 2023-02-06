@@ -1,0 +1,13 @@
+<mat-sidenav-container>
+    <mat-sidenav-content>
+        <app-navheader></app-navheader>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-tab-group [backgroundColor]="tabBackgorund" style="margin-top: 120px;">
+	<mat-tab *ngFor = "let tableSection of tableSections; let i = index" label="{{tableSection.name}}" >
+		<div class="tables-modules">
+			<app-drag-drop [sectorId]="tableSection.id"></app-drag-drop>
+		</div>	
+	</mat-tab>
+</mat-tab-group>

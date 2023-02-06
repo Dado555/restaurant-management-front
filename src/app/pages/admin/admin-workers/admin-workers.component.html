@@ -1,0 +1,13 @@
+<mat-sidenav-container style="height: 100%">
+    <mat-sidenav #sidenav mode="push" [(opened)]="opened">
+        <app-admin-sidebar [currentComponent]="componentName"></app-admin-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-admin-workers-list (toggleSidenav)="sidenav.toggle()"></app-admin-workers-list>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!--<div id="main-wrapper" style="height: 100%; width: 100%;">
+    <app-admin-sidebar class="left"></app-admin-sidebar>
+    <app-admin-workers-list class="right"></app-admin-workers-list>
+</div>-->

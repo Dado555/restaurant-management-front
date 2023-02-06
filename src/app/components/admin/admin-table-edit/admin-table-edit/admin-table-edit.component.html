@@ -1,0 +1,49 @@
+<div class="content-body" style="height: 100%; width: 100%; min-height: 500px; padding-top: 0; margin-left: 0;">
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <div class="nav-header" style="width: 100%;">
+        <div style="background-color: white; width: 100%; height: 100%;">
+            <div class="row page-titles mx-0" style="display: flex; height: 100%;">
+                <div style="height: 100%; flex: 20%;">
+                    <div style="display: inline-block; height: 100%;">
+                        <a href="http://localhost:4200/admin" class="brand-logo">
+                            <img class="logo-abbr" src="../../../assets/images/logo.png" alt="">
+                            <img class="logo-compact" src="../../../assets/images/logo-aldente.png" alt="">
+                            <img class="brand-title" src="../../../assets/images/logo-aldente.png" alt="">
+                        </a>
+                    </div>
+                    <div id="hamburger" class="hamburger" (click)="toggleSidenavFunc()" style="display: inline-block; top: -5px;">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                </div>
+
+                <div style="flex: 30%; display: flex; justify-content: flex; align-items: center;">
+                    <h2 class="text-black font-w600 mb-0" style="text-align: center;">Table Layout</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+    <div style="padding-top: 120px;">
+        <div class="sector-menu">
+            <button mat-raised-button id="add-sector-btn" color="secondary" aria-label="Add table" (click)="openAddSectionForm()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button *ngIf="getSelectedElement()" id="delete-sector-btn" mat-raised-button color="secondary" aria-label="Delete table" (click)="openDeleteSectionForm()"><mat-icon>delete</mat-icon></button>
+            <button *ngIf="getSelectedElement()" id="edit-sector-btn" mat-raised-button color="secondary" aria-label="Save table" (click)="openUpdateSectionForm()"><mat-icon>edit</mat-icon></button>
+        </div>
+
+        <mat-tab-group id="admin-sectors" [backgroundColor]="tabBackgorund" [(selectedIndex)]="demo1TabIndex">
+            <mat-tab *ngFor = "let tableSection of tableSections; let i = index" label="{{tableSection.name}}" >
+                <div class="tables-modules">
+                    <app-drag-drop [editMode]="true" [sectorId]="tableSection.id"></app-drag-drop>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+</div>

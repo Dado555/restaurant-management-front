@@ -1,0 +1,147 @@
+<div class="modal-content">
+    <div class="modal-body" style="padding: 0; margin: 0;">
+        <!-- Modal custom content -->
+        <div class="content-body" style="padding: 0; margin: 0;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">{{ title }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="form-valide" action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-name">Item name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="menuItem.item.name" type="text" class="form-control" id="val-name" name="val-username" placeholder="Unesi ime..">
+                                                        <small *ngIf="checkForm.invalidName" style="color: red">Enter name!</small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-price">Price <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                      <input #price="ngModel" [(ngModel)]="priceValueString" [pattern]="'^\\d+([,.]\\d{1,2})?RSD$'" type="text" class="form-control" id="val-price" name="val-email" placeholder="300RSD">
+                                                      <small *ngIf="price.errors?.['pattern']" style="color: red">Price format is not valid!</small>
+                                                      <small *ngIf="checkForm.invalidPrice" style="color: red">Enter price!</small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                  <label class="col-lg-4 col-form-label" for="val-expense">Expense <span
+                                                    class="text-danger">*</span>
+                                                  </label>
+                                                  <div class="col-lg-6">
+                                                    <input #expense="ngModel" [(ngModel)]="expenseValueString" [pattern]="'^\\d+([,.]\\d{1,2})?RSD$'" type="text" class="form-control" id="val-expense" name="val-expense" placeholder="200RSD">
+                                                    <small *ngIf="expense.errors?.['pattern']" style="color: red">Expense format is not valid!</small>
+                                                    <small *ngIf="checkForm.invalidExpense" style="color: red">Enter expense!</small>
+                                                  </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-preparation">Preparation time
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input #prepTime="ngModel" [(ngModel)]="prepTimeString" [pattern]="'^(?=\\d+[ywdhms])(( ?\\d+y)?(?!\\d))?(( ?\\d+w)?(?!\\d))?(( ?\\d+d)?(?!\\d))?(( ?\\d+h)?(?!\\d))?(( ?\\d+m)?(?!\\d))?(( ?\\d+s)?(?!\\d))?( ?\\d+ms)?$'" type="text" class="form-control" id="val-preparation" name="val-preparation" placeholder="1h 20m 45s">
+                                                        <small *ngIf="prepTime.errors?.['pattern']" style="color: red">Preparation time format is not valid!</small>
+                                                        <small *ngIf="checkForm.invalidPrepTime" style="color: red">Enter preparation time!</small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-ingredients">Ingredients<span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                      <textarea [(ngModel)]="menuItem.item.ingredients" class="form-control" id="val-ingredients" name="val-ingredients" rows="3" placeholder="100g brasna, 0.5l mlijeka.."></textarea>
+                                                      <small *ngIf="checkForm.invalidIngredients" style="color: red">Enter ingredients!</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group row">
+                                                  <label class="col-lg-2 col-form-label">
+                                                    <input id="type-food" type="radio" name="food" (click)="itemCat='food'" [(ngModel)]="itemCat" value="food">
+                                                    Food
+                                                  </label>
+                                                  <label class="col-lg-2 col-form-label">
+                                                    <input type="radio" name="drink" (click)="itemCat='drink'" [(ngModel)]="itemCat" value="drink">
+                                                    Drink
+                                                  </label>
+                                                  <div class="col-lg-7">
+                                                    <label class="col-lg-5 col-form-label">
+                                                      <input type="radio" [disabled]="itemCat === 'food'" name="alcoholic" (click)="drinkType='likeABoss'" [(ngModel)]="drinkType" value="likeABoss">
+                                                      Alcoholic
+                                                    </label>
+                                                    <label class="col-lg-6 col-form-label">
+                                                      <input type="radio" [disabled]="itemCat === 'food'" name="nonAlcoholic" (click)="drinkType='alwaysAvoid'" [(ngModel)]="drinkType" value="alwaysAvoid">
+                                                      Not alcoholic
+                                                    </label>
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                  <label class="col-lg-4 col-form-label">
+                                                    <input id="existing-category" type="radio" name="salary" (click)="type='existing'" [(ngModel)]="type" value="existing">
+                                                    Existing subcategory
+                                                  </label>
+                                                  <div class="col-lg-6">
+                                                    <select id="existing-category-select" [(ngModel)]="existingCat" [disabled]="type === 'new'" class="form-control" name="existingCat">
+                                                      <option [id]="'existing-category-'+cat.name" *ngFor="let cat of existingCategories" value="{{ cat.id }}">{{ cat.name }}</option>
+                                                    </select>
+                                                    <small *ngIf="checkForm.invalidExistingSubcat" style="color: red">Choose one of subcategories!</small>
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                  <label class="col-lg-4 col-form-label">
+                                                    <input type="radio" name="salary" (click)="type='new'" [(ngModel)]="type" value="new">
+                                                    New subcategory
+                                                  </label>
+                                                  <div class="col-lg-6">
+                                                    <input [(ngModel)]="newCat" [disabled]="type === 'existing'" type="text" class="form-control" id="val-category" name="val-category" placeholder="Ime nove kategorije..">
+                                                    <small *ngIf="checkForm.invalidNewSubcat" style="color: red">Enter new subcategory!</small>
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                  <label class="col-lg-4 col-form-label" for="val-description">Description</label>
+                                                  <div class="col-lg-6">
+                                                    <textarea [(ngModel)]="menuItem.item.description" class="form-control" id="val-description" name="val-description" rows="8" placeholder="Nacin pripreme je.."></textarea>
+                                                    <small *ngIf="checkForm.invalidDesc" style="color: red">Description is not valid!</small>
+                                                  </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                  <label class="col-lg-4 col-form-label" for="val-name">Image url
+                                                      <span class="text-danger">*</span>
+                                                  </label>
+                                                  <div class="col-lg-6">
+                                                      <input [(ngModel)]="menuItem.imageUrl" type="text" class="form-control" id="val-name" name="val-imageUrl" placeholder="http://...">
+                                                      <small *ngIf="checkForm.invalidName" style="color: red">Enter url</small>
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group row" style="justify-content: end;">
+                                                  <button *ngIf="menuItem.id" type="button" class="btn btn-danger" (click)="deleteMenuItem(menuItem.id)" style="margin-right: 110px;">Remove Menu Item</button>
+                                                  <button type="button" class="btn btn-primary" (click)="close()">Cancel</button>
+                                                  <button id="submitBtn" type="button" class="btn btn-primary" (click)="confirm()" style="margin-left: 15px;">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

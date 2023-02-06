@@ -1,0 +1,72 @@
+<mat-sidenav-container>
+    <mat-sidenav-content>
+        <app-navheader></app-navheader>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<div class="container" style="margin-top: 150px;">
+    <button mat-raised-button color="secondary" aria-label="back" (click)="goToTables()">
+        <mat-icon>arrow-back</mat-icon>
+    </button>
+    <div class="button-container">
+        <button mat-raised-button id="add-new-order-item-btn" (click)="addItemIntoOrder()" class="btn btn-primary" >ADD NEW ORDER ITEM</button>
+    </div>
+    
+    <div id="table-page" class="table" *ngFor="let order of orders" >
+        <div *ngIf="order.orderItems">
+            <table mat-table [dataSource]="order.orderItems" matSort class="mat-elevation-z8">
+            
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
+                    <td mat-cell *matCellDef="let orderItem"> {{orderItem.menuItem.item.name}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="preparationTime">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by preparationTime"> Preparation time </th>
+                    <td mat-cell *matCellDef="let orderItem"> {{orderItem.menuItem.item.preparationTime}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="currentPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by price"> Price </th>
+                    <td mat-cell *matCellDef="let orderItem"> {{orderItem.price.value}} RSD</td>
+                </ng-container>
+                
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount"> Amount </th>
+                    <td mat-cell *matCellDef="let orderItem"> {{orderItem.amount}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status"> Status </th>
+                    <td mat-cell *matCellDef="let orderItem"><span [class]="getColorForStatus(orderItem.status)">{{ orderItem.status }}</span></td>												
+                </ng-container>
+
+                <ng-container matColumnDef="changeStatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status"> </th>
+                    <td mat-cell *matCellDef="let orderItem"><button *ngIf="orderItem.status === 'FOR_PREPARATION' || orderItem.status === 'AWAITING_APPROVAL' || orderItem.status === 'READY'" [class]="getColorForChangeStatus(orderItem.status)" (click)="handleOrderItem(orderItem)">{{ getTextButtonForStatus(orderItem.status) }}</button></td>												
+                </ng-container>
+
+                <ng-container matColumnDef="remove">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                    <td mat-cell *matCellDef="let orderItem">
+                        <button *ngIf="orderItem.status === 'FOR_PREPARATION' || orderItem.status === 'AWAITING_APPROVAL'" (click)="removeOrderItem(orderItem.id)" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>    
+                    </td>                    
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div style="float: right; margin-top: 20px;">
+                <div>
+                    <h1>Total: {{ getTotalPrice(order.orderItems) }} RSD</h1>
+                    <div class="button-container">
+                        <button *ngIf="order.id" mat-raised-button id="checkout-btn" (click)="checkout(order.id)" class="btn btn-primary" >CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

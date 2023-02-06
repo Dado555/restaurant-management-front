@@ -1,0 +1,189 @@
+<!--**********************************
+    Content body start
+***********************************-->
+<div class="content-body" style="height: 100%; width: 100%; padding-top: 0; margin-left: 0;">
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+    <div class="nav-header" style="width: 100%;">
+        <div style="background-color: white; width: 100%; height: 100%;">
+            <div class="row page-titles mx-0" style="display: flex; height: 100%;">
+                <div style="flex: 30%;">
+                    <div style="display: inline-block; height: 100%;">
+                        <a href="http://localhost:4200/admin" class="brand-logo">
+                            <img class="logo-abbr" src="../../../assets/images/logo.png" alt="">
+                            <img class="logo-compact" src="../../../assets/images/logo-aldente.png" alt="">
+                            <img class="brand-title" src="../../../assets/images/logo-aldente.png" alt="">
+                        </a>
+                    </div>
+                    <div id="hamburger" class="hamburger" (click)="toggleSidenavFunc()" style="display: inline-block; top: -5px;">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                </div>
+
+                <div class="column-header-workers" style="flex: 30%; display: flex; justify-content: flex-end; align-items: center; ">
+                    <div class="col-sm-6 p-md-0" >
+                        <div class="welcome-text">
+                            <h4>Workers list</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column-header-workers" style="flex: 40%; display: flex; justify-content: flex-end; align-items: center;">
+                    <div class="btn btn-success" style="background-color: blue; cursor: pointer;" (click)="openAddForm()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 30"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" fill="#fff"/></svg>
+                        <span id="addNew" style="font-size: 20px;"> Add new</span>
+                    </div>
+
+                    <div class="header-left" style="margin-left: 10px;">
+                      <div class="search_bar dropdown show">
+                        <div class="dropdown-menu p-0 m-0 show">
+                          <form>
+                            <input [(ngModel)]="searchInput" name="search" class="form-control" type="search" placeholder="Search workers" aria-label="Search">
+                          </form>
+                        </div>
+                        <span (click)="searchItems()" class="search_icon p-3 c-pointer">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.7871 22.7761L17.9548 16.9437C19.5193 15.145 20.4665 12.7982 20.4665 10.2333C20.4665 4.58714 15.8741 0 10.2333 0C4.58714 0 0 4.59246 0 10.2333C0 15.8741 4.59246 20.4665 10.2333 20.4665C12.7982 20.4665 15.145 19.5193 16.9437 17.9548L22.7761 23.7871C22.9144 23.9255 23.1007 24 23.2816 24C23.4625 24 23.6488 23.9308 23.7871 23.7871C24.0639 23.5104 24.0639 23.0528 23.7871 22.7761ZM1.43149 10.2333C1.43149 5.38004 5.38004 1.43681 10.2279 1.43681C15.0812 1.43681 19.0244 5.38537 19.0244 10.2333C19.0244 15.0812 15.0812 19.035 10.2279 19.035C5.38004 19.035 1.43149 15.0865 1.43149 10.2333Z" fill="#A4A4A4"/></svg>
+                                </span>
+                      </div>
+                    </div>
+
+                    <div class="dropdown custom-dropdown ml-3" style="margin-bottom: 0; margin-right: 20px">
+                      <button type="button" class="btn btn-primary light d-flex align-items-center svg-btn" data-toggle="dropdown" aria-expanded="false">
+<!--                        <svg width="16" height="16" class="scale5" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.4281 2.856H21.8681V1.428C21.8681 0.56 21.2801 0 20.4401 0C19.6001 0 19.0121 0.56 19.0121 1.428V2.856H9.71606V1.428C9.71606 0.56 9.15606 0 8.28806 0C7.42006 0 6.86006 0.56 6.86006 1.428V2.856H5.57206C2.85606 2.856 0.560059 5.152 0.560059 7.868V23.016C0.560059 25.732 2.85606 28.028 5.57206 28.028H22.4281C25.1441 28.028 27.4401 25.732 27.4401 23.016V7.868C27.4401 5.152 25.1441 2.856 22.4281 2.856ZM5.57206 5.712H22.4281C23.5761 5.712 24.5841 6.72 24.5841 7.868V9.856H3.41606V7.868C3.41606 6.72 4.42406 5.712 5.57206 5.712ZM22.4281 25.144H5.57206C4.42406 25.144 3.41606 24.136 3.41606 22.988V12.712H24.5561V22.988C24.5841 24.136 23.5761 25.144 22.4281 25.144Z" fill="#2F4CDD"/></svg>-->
+                        <span class="fs-16 ml-3">{{ workerType }}</span>
+                        <i class="fa fa-angle-down scale5 ml-3"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" (click)="filterWorkerType('Admins')">Admins</a>
+                        <a class="dropdown-item" (click)="filterWorkerType('Managers')">Managers</a>
+                        <a class="dropdown-item" (click)="filterWorkerType('Waiters')">Waiters</a>
+                        <a class="dropdown-item" (click)="filterWorkerType('Bartenders')">Bartenders</a>
+                        <a class="dropdown-item" (click)="filterWorkerType('Cooks')">Cooks</a>
+                        <a class="dropdown-item" (click)="filterWorkerType('All workers')">All workers</a>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+    <div style="padding-top: 120px;">
+        <perfect-scrollbar style="position: relative; width: 100%; height: 100%;" [scrollIndicators]="true" (psXReachEnd)="onScrollEvent($event)"
+            (psYReachEnd)="onScrollEvent($event)" (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollEvent($event)" class="scroll-container">
+                <div class="scrollable-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="table" mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8 table table-sm mb-0 table-striped">
+                                              <ng-container matColumnDef="firstName" class="py-3">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by first name"> First Name </th>
+                                                <td mat-cell *matCellDef="let worker">
+                                                  <div class="media d-flex align-items-center">
+                                                    <div class="media-body">
+                                                      <h5 id="{{'firstName' + worker.id}}" type="text" class="mb-0 fs--1">{{ worker.firstName }}</h5>
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                              </ng-container>
+                                              <ng-container matColumnDef="lastName" class="py-3">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by last name"> Last Name </th>
+                                                <td mat-cell *matCellDef="let worker">
+                                                  <div class="media d-flex align-items-center">
+                                                    <div class="media-body">
+                                                      <h5 id="{{'lastName' + worker.id}}" type="text" class="mb-0 fs--1">{{ worker.lastName }}</h5>
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                              </ng-container>
+                                              <ng-container matColumnDef="phone" class="py-3">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by phone number"> Phone </th>
+                                                <td mat-cell *matCellDef="let worker">
+                                                  <h5 id="{{'phoneNumber' + worker.id}}" type="text" class="py-2">{{ worker.phoneNumber }}</h5>
+                                                </td>
+                                              </ng-container>
+                                              <ng-container matColumnDef="username" class="py-3">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by username"> Username </th>
+                                                <td mat-cell *matCellDef="let worker">
+                                                  <h5 id="{{'username' + worker.id}}" type="text" >{{ worker.username }}</h5>
+                                                </td>
+                                              </ng-container>
+                                              <ng-container matColumnDef="empty" class="py-3">
+                                                <th mat-header-cell *matHeaderCellDef></th>
+                                                <td mat-cell *matCellDef="let worker" class="py-2 text-right">
+                                                  <div class="dropdown"><button id="{{'select' + worker.id}}" class="btn btn-primary tp-btn-light sharp" type="button" data-toggle="dropdown"><span class="fs--1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></span></button>
+                                                    <div class="dropdown-menu dropdown-menu-right border py-0">
+                                                      <div class="py-2"><a id="{{'update' + worker.id}}" (click)="openEditForm(worker)" class="dropdown-item">Edit</a><a [hidden]="user.username === worker.username" id="{{'delete' + worker.id}}" class="dropdown-item text-danger" (click)="deleteWorker(worker)">Delete</a></div>
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                              </ng-container>
+                                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                              <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="btn-reveal-trigger"></tr>
+                                            </table>
+                                            <mat-paginator [pageSizeOptions]="[5, 10, 15]"
+                                                           showFirstLastButtons
+                                                           aria-label="Select page of periodic elements">
+                                            </mat-paginator>
+<!--                                            <table id="table" class="table table-sm mb-0 table-striped">-->
+<!--                                                <thead>-->
+<!--                                                    <tr>-->
+<!--                                                        <th>First Name</th>-->
+<!--                                                        <th>Last Name</th>-->
+<!--                                                        <th>Phone</th>-->
+<!--                                                        <th class=" pl-5" style="min-width: 200px;">Username-->
+<!--                                                        </th>-->
+<!--                                                        <th></th>-->
+<!--                                                    </tr>-->
+<!--                                                </thead>-->
+<!--                                                <tbody id="workers">-->
+<!--                                                    <tr *ngFor="let worker of workers" class="btn-reveal-trigger">-->
+<!--                                                        <td class="py-3">-->
+<!--                                                                <div class="media d-flex align-items-center">-->
+<!--                                                                    <div class="media-body">-->
+<!--                                                                        <h5 id="{{'firstName' + worker.id}}" type="text" class="mb-0 fs&#45;&#45;1">{{ worker.firstName }}</h5>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                        </td>-->
+<!--                                                        <td class="py-3">-->
+<!--                                                                <div class="media d-flex align-items-center">-->
+<!--                                                                    <div class="media-body">-->
+<!--                                                                        <h5 type="text" class="mb-0 fs&#45;&#45;1">{{ worker.lastName }}</h5>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                        </td>-->
+<!--                                                        <td>-->
+<!--                                                            <h5 type="text" class="py-2">{{ worker.phoneNumber }}</h5> -->
+<!--                                                        </td>-->
+<!--                                                        <td>-->
+<!--                                                            <h5 type="text" class="py-2 pl-5">{{ worker.username }}</h5>-->
+<!--                                                        </td>-->
+<!--                                                        <td class="py-2 text-right">-->
+<!--                                                            <div class="dropdown"><button id="{{'select' + worker.id}}" class="btn btn-primary tp-btn-light sharp" type="button" data-toggle="dropdown"><span class="fs&#45;&#45;1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></span></button>-->
+<!--                                                                <div class="dropdown-menu dropdown-menu-right border py-0">-->
+<!--                                                                    <div class="py-2"><a id="{{'update' + worker.id}}" (click)="openEditForm(worker)" class="dropdown-item">Edit</a><a [hidden]="user.username === worker.username" id="{{'delete' + worker.id}}" class="dropdown-item text-danger" (click)="deleteWorker(worker)">Delete</a></div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+<!--                                                </tbody>-->
+<!--                                            </table>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </perfect-scrollbar>
+    </div>
+</div>
+<!--**********************************
+    Content body end
+***********************************-->

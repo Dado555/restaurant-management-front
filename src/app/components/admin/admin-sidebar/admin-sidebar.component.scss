@@ -1,0 +1,14 @@
+.scroll-container {
+  position: relative;
+}
+
+.scrollable-content {
+  padding: 16px;
+  margin: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .deznav .nav-text {
+    display: inline-block !important;
+  }
+}

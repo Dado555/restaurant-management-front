@@ -1,0 +1,133 @@
+<div class="modal-content">
+    <div class="modal-body" style="padding: 0; margin: 0;">
+        <!-- Modal custom content -->
+        <div class="content-body" style="padding: 0; margin: 0;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">{{ title }} {{ title === 'Edit Worker' ? '(Enter current password to confirm, or new one to change)' : '' }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="form-valide" action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-firstName">First Name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="working_user.firstName" type="text" class="form-control" id="val-firstName" name="val-firstName" placeholder="Enter first name...">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-lastName">Last Name <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="working_user.lastName" type="text" class="form-control" id="val-lastName" name="val-lastName" placeholder="Your last name...">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-salary">Salary (RSD)
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="working_user.salary" type="text" class="form-control" id="val-salary" name="val-salary" placeholder="50000">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-phone">Phone
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="working_user.phoneNumber" type="text" class="form-control" id="val-phone" name="val-phone" placeholder="0602223333">
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+
+
+
+                                            <div class="col-xl-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-role">Role
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <select [(ngModel)]="working_user.role" class="form-control" id="val-role" name="val-role">
+                                                            <option disabled>Izabri ulogu</option>
+                                                            <option value="MANAGER">Manager</option>
+                                                            <option id="bartender" value="BARTENDER">Bartender</option>
+                                                            <option value="WAITER">Waiter</option>
+                                                            <option value="COOK">Cook</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <div class="form-group row" *ngIf="working_user.role === 'MANAGER'">
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Username
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="working_user.username" type="text" class="form-control" id="val-username" name="val-username" placeholder="LeeVanCleef">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row" *ngIf="working_user.role !== 'MANAGER'">
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Pin
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <code-input
+                                                        id="pin" [isCodeHidden]="true"
+                                                        #codeInput
+                                                        [isCodeHidden]="false"
+                                                        [codeLength]="4"
+                                                        (codeChanged)="onCodeChanged($event)"
+                                                        >
+                                                    </code-input>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" *ngIf="working_user.role === 'MANAGER'">
+                                                    <label class="col-lg-4 col-form-label" for="val-password">Password
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="working_user.password" type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one..">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row" *ngIf="working_user.role === 'MANAGER'">
+                                                    <label class="col-lg-4 col-form-label" for="val-confirm-password">Confirm Password <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input [(ngModel)]="passwd_confirm" type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="..and confirm it!">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group row" style="justify-content: end;">
+                                                    <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+                                                    <button id="submitButton" type="button" class="btn btn-primary" 
+                                                    (click)="title === 'Create Worker' ? createUser() : editUser()" style="margin-left: 15px;">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.notifications {
+  .notification-item {
+    padding: 1em;
+    border: 1px solid #eee;
+    border-radius: 0.25em;
+
+    .avatar {
+      margin-right: 10px;
+      img {
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        border-radius: 100%;
+      }
+    }
+
+    .table {
+      margin-left: 1em;
+    }
+
+    .status {
+      float: right;
+    }
+  }
+}

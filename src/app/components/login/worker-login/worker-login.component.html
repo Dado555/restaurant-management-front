@@ -1,0 +1,45 @@
+<div class="authincation h-100">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-md-6">
+                <div class="authincation-content">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form">
+                                <a *ngIf="authedMaster" (click)="logoutMaster()">Logout</a>
+                                <h4 class="text-center mb-4">Sign in your account</h4>
+                                <form (ngSubmit)="authMaster" >
+                                    <div *ngIf="!authedMaster" class="form-group">
+                                        <label class="mb-1"><strong>Master password</strong></label>
+                                        <input id="masterPassword" type="password" [(ngModel)]="masterPassword" name="masterPassword" class="form-control">
+                                    </div>
+                                    <div *ngIf="authedMaster" class="form-group" (appAfterIf)="focusPin()">
+                                        <label class="mb-1"><strong>PIN</strong></label>
+
+                                        <code-input id="pin" [isCodeHidden]="true"
+                                            #codeInput
+                                            [codeLength]="4"
+                                            (codeChanged)="onCodeChanged($event)"
+                                            (codeCompleted)="onCodeCompleted($event)">
+                                        </code-input>
+                                        <!-- <input type="password" class="form-control" value=""> -->
+                                    </div>
+                                    <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                    </div>
+                                    <div class="text-center">
+                                        <button id="worker-login-submit" (click)="authButton()" type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="notifications-component col-md-6">
+                <!-- <app-login-notification> </app-login-notification> -->
+            </div>
+        </div>
+    </div>
+</div>
